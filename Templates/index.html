@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VENT HELP!</title>
+    <style>
+        body {
+            background-color: black; /* Black background */
+            color: white; /* White text */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 36px;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background for the form */
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 500px;
+            border-radius: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input {
+            background-color: #333; /* Dark input fields */
+            color: white; /* White text */
+        }
+
+        button {
+            background-color: #007BFF; /* Blue button */
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        .results {
+            background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background for results */
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 500px;
+            border-radius: 10px;
+        }
+
+        .results h2 {
+            text-align: center;
+        }
+
+        .results p {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>VENT HELP!</h1>
+    <form id="ventForm">
+        <label for="weight">Patient Weight (kg):</label>
+        <input type="number" id="weight" name="weight" required>
+
+        <label for="age">Patient Age (years):</label>
+        <input type="number" id="age" name="age" step="0.01" required>
+
+        <label for="sex">Patient Sex (M/F):</label>
+        <input type="text" id="sex" name="sex" maxlength="1" required>
+
+        <label for="ph">pH:</label>
+        <input type="number" id="ph" name="ph" step="0.01" required>
+
+        <label for="pao2">PaO2 (mmHg):</label>
+        <input type="number" id="pao2" name="pao2" required>
+
+        <label for="paco2">PaCO2 (mmHg):</label>
+        <input type="number" id="paco2" name="paco2" required>
+
+        <label for="bicarb">Bicarb (mEq/L):</label>
+        <input type="number" id="bicarb" name="bicarb" step="0.01" required>
+
+        <label for="base_excess">Base Excess (mEq/L):</label>
+        <input type="number" id="base_excess" name="base_excess" step="0.01" required>
+
+        <label for="cao2">CaO2 (mL O2/dL):</label>
+        <input type="number" id="cao2" name="cao2" step="0.01" required>
+
+        <button type="button" onclick="submitForm()">Get Recommendations</button>
+    </form>
+
+    <div id="results" class="results" style="display: none;">
+        <h2>Recommended Ventilator Settings</h2>
+        <p><strong>Recommended Mode:</strong> <span id="mode"></span></p>
+        <p><strong>Respiratory Rate:</strong> <span id="rate"></span></p>
+        <p><strong>PIP:</strong> <span id="pip"></span></p>
+        <p><strong>PEEP:</strong> <span id="peep"></span></p>
+        <p><strong>Pressure Support:</strong> <span id="pressure_support"></span></p>
+        <p><strong>iTime:</strong> <span id="itime"></span></p>
+        <p><strong>FiO2:</strong> <span id="fio2"></span></p>
+    </div>
+
+    <script>
+        async function submitForm() {
+            // Collect form data
+            const data = {
+                weight: parseFloat(document.getElementById('weight').value),
+                age: parseFloat(document.getElementById('age').value),
+                sex: document.getElementById('sex').value.toUpperCase(),
+                ph: parseFloat(document.getElementById('ph').value),
+                pao2: parseFloat(document.getElementById('pao2').value),
+                paco2: parseFloat(document.getElementById('paco2').value),
+                bicarb: parseFloat(document.getElementById('bicarb').value),
+                base_excess: parseFloat(document.getElementById('base_excess').value),
+                cao2: parseFloat(document.getElementById('cao2').value),
+            };
+
+            // Simulate a recommendation calculation (replace with backend API call)
+            const recommendations = {
+                mode: "PCSIMVPS",
+                rate: "30",
+                pip: "20",
+                peep: "5",
+                pressure_support: "10",
+                itime: "0.6",
+                fio2: "0.4"
+            };
+
+            // Display recommendations
+            document.getElementById('mode').textContent = recommendations.mode;
+            document.getElementById('rate').textContent = recommendations.rate;
+            document.getElementById('pip').textContent = recommendations.pip;
+            document.getElementById('peep').textContent = recommendations.peep;
+            document.getElementById('pressure_support').textContent = recommendations.pressure_support;
+            document.getElementById('itime').textContent = recommendations.itime;
+            document.getElementById('fio2').textContent = recommendations.fio2;
+            document.getElementById('results').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

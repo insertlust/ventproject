@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale 0.5">
+    <title>INSERT LUST COIN CHECKER</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function openAnalysisSites() {
+            var address = document.getElementById("address").value.trim();
+            if (address === "") {
+                alert("Please enter a valid coin address.");
+                return;
+            }
+
+            let analysisSites = [
+                "https://rugcheck.xyz/tokens/" + address,
+                "https://www.antirugagent.com/ca/" + address,
+                "https://trench.bot/bundles/" + address,
+                "https://x.com/search?q=" + encodeURIComponent(address)
+            ];
+
+            analysisSites.forEach((site, index) => {
+                setTimeout(() => {
+                    window.open(site, "_blank");
+                }, index * 500);
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>INSERT LUST COIN CHECKER</h1>
+        <textarea id="address" placeholder="Paste Meme Coin Address Here So You Dont Get Rugged!!!!"></textarea>
+        <button onclick="openAnalysisSites()">CHECK</button>
+        <div class="links">
+            <a href="/about">About Us</a>
+            <a href="/donations">Donate</a>
+        </div>
+    </div>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>INSERT LUST COIN CHECKER</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+        <script>
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/static/sw.js');
+            }
+        </script>
+    </head>
+</body>
+</html>

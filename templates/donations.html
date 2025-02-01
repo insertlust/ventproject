@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donations - INSERT LUST COIN CHECKER</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function copyWalletAddress() {
+            var walletAddress = "FxZaPytznfvV9fJmVrNQPShv99UNZhVHhRG4a6TATKTF";
+            navigator.clipboard.writeText(walletAddress);
+            alert("Solana Wallet Address Copied!");
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Support Our Mission</h1>
+        <p>Help us keep traders safe from scams and rugpulls.</p>
+        <p><strong>Solana Wallet Address:</strong></p>
+        <input type="text" value="FxZaPytznfvV9fJmVrNQPShv99UNZhVHhRG4a6TATKTF" readonly>
+        <button onclick="copyWalletAddress()">Copy Address</button>
+        <a href="/">Back to Home</a>
+    </div>
+</body>
+</html>

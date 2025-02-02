@@ -69,12 +69,20 @@
     }
 
     /* Zoomable Iframe */
+    .zoom-container {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        touch-action: pinch-zoom; /* Enables mobile pinch zoom */
+    }
+
     .zoomable-iframe {
         width: 100%;
         height: 100%;
         border: 2px solid #FFD700;
-        overflow: hidden;
-        touch-action: pinch-zoom;
+        transform-origin: center;
+        transition: transform 0.2s ease-in-out;
     }
 
     /* Clickable Overlay */
@@ -96,20 +104,48 @@
     }
     </style>
     <script>
-        function enableZoom(iframe) {
-            iframe.addEventListener('wheel', function(event) {
-                event.preventDefault();
-                let scale = Number(iframe.dataset.scale) || 1;
-                scale += event.deltaY * -0.01;
-                scale = Math.min(Math.max(0.5, scale), 2);
-                iframe.style.transform = `scale(${scale})`;
-                iframe.dataset.scale = scale;
+        function enableZoom() {
+            let zoomContainers = document.querySelectorAll('.zoom-container');
+            zoomContainers.forEach(container => {
+                let iframe = container.querySelector('.zoomable-iframe');
+                let scale = 1;
+
+                container.addEventListener("wheel", function(event) {
+                    event.preventDefault();
+                    scale += event.deltaY * -0.01;
+                    scale = Math.min(Math.max(1, scale), 3); // Limits zoom range between 1x and 3x
+                    iframe.style.transform = `scale(${scale})`;
+                });
+
+                let touchStartDistance = 0;
+                let touchScale = 1;
+
+                container.addEventListener("touchstart", function(event) {
+                    if (event.touches.length === 2) {
+                        touchStartDistance = Math.hypot(
+                            event.touches[0].pageX - event.touches[1].pageX,
+                            event.touches[0].pageY - event.touches[1].pageY
+                        );
+                    }
+                });
+
+                container.addEventListener("touchmove", function(event) {
+                    if (event.touches.length === 2) {
+                        event.preventDefault();
+                        let newDistance = Math.hypot(
+                            event.touches[0].pageX - event.touches[1].pageX,
+                            event.touches[0].pageY - event.touches[1].pageY
+                        );
+                        touchScale *= newDistance / touchStartDistance;
+                        touchStartDistance = newDistance;
+                        touchScale = Math.min(Math.max(1, touchScale), 3);
+                        iframe.style.transform = `scale(${touchScale})`;
+                    }
+                });
             });
         }
 
-        document.addEventListener("DOMContentLoaded", function() {
-            document.querySelectorAll('.zoomable-iframe').forEach(enableZoom);
-        });
+        document.addEventListener("DOMContentLoaded", enableZoom);
     </script>
 </head>
 <body>
@@ -122,37 +158,49 @@
             <div class="iframe-wrapper">
                 <h2>GMGN Chart</h2>
                 <a href="https://www.gmgn.cc/kline/solana/{{ address }}" target="_blank" class="iframe-overlay"></a>
-                <iframe class="zoomable-iframe" src="https://www.gmgn.cc/kline/solana/{{ address }}" title="GMGN Chart"></iframe>
+                <div class="zoom-container">
+                    <iframe class="zoomable-iframe" src="https://www.gmgn.cc/kline/solana/{{ address }}" title="GMGN Chart"></iframe>
+                </div>
             </div>
 
             <div class="iframe-wrapper">
                 <h2>AntiRugAgent</h2>
                 <a href="https://www.antirugagent.com/ca/{{ address }}" target="_blank" class="iframe-overlay"></a>
-                <iframe class="zoomable-iframe" src="https://www.antirugagent.com/ca/{{ address }}" title="AntiRugAgent"></iframe>
+                <div class="zoom-container">
+                    <iframe class="zoomable-iframe" src="https://www.antirugagent.com/ca/{{ address }}" title="AntiRugAgent"></iframe>
+                </div>
             </div>
 
             <div class="iframe-wrapper">
                 <h2>TrenchBot</h2>
                 <a href="https://trench.bot/bundles/{{ address }}" target="_blank" class="iframe-overlay"></a>
-                <iframe class="zoomable-iframe" src="https://trench.bot/bundles/{{ address }}" title="TrenchBot"></iframe>
+                <div class="zoom-container">
+                    <iframe class="zoomable-iframe" src="https://trench.bot/bundles/{{ address }}" title="TrenchBot"></iframe>
+                </div>
             </div>
 
             <div class="iframe-wrapper">
                 <h2>X (Twitter) Search</h2>
                 <a href="https://x.com/search?q={{ address }}&src=typed_query" target="_blank" class="iframe-overlay"></a>
-                <iframe class="zoomable-iframe" src="https://x.com/search?q={{ address }}&src=typed_query" title="Twitter Search"></iframe>
+                <div class="zoom-container">
+                    <iframe class="zoomable-iframe" src="https://x.com/search?q={{ address }}&src=typed_query" title="Twitter Search"></iframe>
+                </div>
             </div>
 
             <div class="iframe-wrapper">
                 <h2>Pump Fun</h2>
                 <a href="https://pump.fun/coin/{{ address }}" target="_blank" class="iframe-overlay"></a>
-                <iframe class="zoomable-iframe" src="https://pump.fun/coin/{{ address }}" title="Pump Fun"></iframe>
+                <div class="zoom-container">
+                    <iframe class="zoomable-iframe" src="https://pump.fun/coin/{{ address }}" title="Pump Fun"></iframe>
+                </div>
             </div>
 
             <div class="iframe-wrapper">
                 <h2>TOSHI BET CASINO NO KYC!</h2>
                 <a href="https://www.toshi.bet/r/gelo" target="_blank" class="iframe-overlay"></a>
-                <iframe class="zoomable-iframe" src="https://www.toshi.bet/r/gelo" title="Toshi.bet"></iframe>
+                <div class="zoom-container">
+                    <iframe class="zoomable-iframe" src="https://www.toshi.bet/r/gelo" title="Toshi.bet"></iframe>
+                </div>
             </div>
         </div>
     </div>

@@ -5,16 +5,119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Results for {{ address }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Fullscreen Container */
+        .container {
+            width: 100%;
+            max-width: 95vw;
+            height: 95vh;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Button Styling */
+        button {
+            width: 250px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            background-color: #FFD700;
+            color: black;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #DAA520;
+        }
+
+        /* Grid Layout for Gallery View */
+        .iframe-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns */
+            grid-template-rows: repeat(2, 1fr); /* 2 rows */
+            grid-gap: 10px;
+            width: 100%;
+            height: 80%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Standard Monitor Resolution */
+        iframe {
+            width: 100%;
+            aspect-ratio: 16 / 9; /* Maintains correct resolution */
+            border: 2px solid #FFD700;
+        }
+
+        /* H2 Headers for Each Section */
+        .iframe-wrapper {
+            text-align: center;
+        }
+
+        .iframe-wrapper h2 {
+            color: #FFD700;
+            margin-bottom: 5px;
+        }
+
+        /* Mobile Adjustments: Stack iframes */
+        @media (max-width: 1024px) {
+            .iframe-container {
+                grid-template-columns: 1fr; /* Stack all iframes */
+                grid-template-rows: auto;
+            }
+
+            iframe {
+                width: 100%;
+                height: auto;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <!-- "Check Another Coin" button moved to the top -->
+        <!-- "Check Another Coin" button at the top -->
         <button onclick="window.location.href='/'">Check Another Coin</button>
         <h1>Analysis Results for {{ address }}</h1>
+
         <div class="iframe-container">
-            <iframe src="https://rugcheck.xyz/tokens/{{ address }}" title="RugCheck"></iframe>
-            <iframe src="https://www.antirugagent.com/ca/{{ address }}" title="AntiRugAgent"></iframe>
-            <iframe src="https://trench.bot/bundles/{{ address }}" title="TrenchBot"></iframe>
+            <div class="iframe-wrapper">
+                <h2>RugCheck</h2>
+                <iframe src="https://rugcheck.xyz/tokens/{{ address }}" title="RugCheck"></iframe>
+            </div>
+
+            <div class="iframe-wrapper">
+                <h2>AntiRugAgent</h2>
+                <iframe src="https://www.antirugagent.com/ca/{{ address }}" title="AntiRugAgent"></iframe>
+            </div>
+
+            <div class="iframe-wrapper">
+                <h2>TrenchBot</h2>
+                <iframe src="https://trench.bot/bundles/{{ address }}" title="TrenchBot"></iframe>
+            </div>
+
+            <div class="iframe-wrapper">
+                <h2>GMGN Solana Token</h2>
+                <iframe src="http://gmgn.ai/sol/token/{{ address }}" title="GMGN Solana Token"></iframe>
+            </div>
+
+            <div class="iframe-wrapper">
+                <h2>GMGN Telegram Bot</h2>
+                <iframe src="https://t.me/gmgnaibot?start=i_Kt4NLeB3" title="GMGN Telegram Bot"></iframe>
+            </div>
+
+            <div class="iframe-wrapper">
+                <h2>DexScreener</h2>
+                <iframe src="https://dexscreener.com/solana/{{ address }}" title="DexScreener"></iframe>
+            </div>
         </div>
     </div>
 </body>

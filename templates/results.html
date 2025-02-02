@@ -103,11 +103,10 @@
         <button onclick="window.location.href='/'">Check Another Coin</button>
         <h1>Analysis Results for {{ address }}</h1>
 
-        <div class="iframe-container">
             <div class="iframe-wrapper">
-                <h2>RugCheck</h2>
-                <a href="https://rugcheck.xyz/auth?redirectTo=%2Ftokens%{{ address }}" target="_blank" class="iframe-overlay"></a>
-                <iframe src="https://rugcheck.xyz/tokens/{{ address }}" title="RugCheck"></iframe>
+                <h2>GMGN Chart</h2>
+                <a href="https://www.gmgn.cc/kline/solana/{{ address }}" target="_blank" class="iframe-overlay"></a>
+                <iframe src="https://www.gmgn.cc/kline/solana/{{ address }}" title="GMGN Chart"></iframe>
             </div>
 
             <div class="iframe-wrapper">
@@ -129,9 +128,9 @@
             </div>
 
             <div class="iframe-wrapper">
-                <h2>Bubble Maps</h2>
-                <a href="https://app.bubblemaps.io/sol/token/{{ address }}" target="_blank" class="iframe-overlay"></a>
-                <iframe src="https://app.bubblemaps.io/sol/token/{{ address }}" title="Bubble Maps"></iframe>
+                <h2>Pump Fun</h2>
+                <a href="https://pump.fun/coin/{{ address }}" target="_blank" class="iframe-overlay"></a>
+                <iframe src="https://pump.fun/coin/{{ address }}" title="Bubble Maps"></iframe>
             </div>
 
             <div class="iframe-wrapper">

@@ -5,6 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Results for {{ address }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <button onclick="window.location.href='/'">Check Another Coin</button>
+        <h1>Analysis Results for {{ address }}</h1>
+
+        <div class="iframe-container">
+            <div class="iframe-wrapper">
+                <h2>RugCheck</h2>
+                <iframe src="https://rugcheck.xyz/tokens/{{ address }}"></iframe>
+            </div>
+
+            <div class="iframe-wrapper">
+                <h2>AntiRugAgent</h2>
+                <iframe src="https://www.antirugagent.com/ca/{{ address }}"></iframe>
+            </div>
+
+            <div class="iframe-wrapper">
+                <h2>TrenchBot</h2>
+                <iframe src="https://trench.bot/bundles/{{ address }}"></iframe>
+            </div>
+
+            <div class="iframe-wrapper">
+                <h2>GMGN Solana Token</h2>
+                <iframe src="http://gmgn.ai/sol/token/{{ address }}"></iframe>
+            </div>
+
+            <div class="iframe-wrapper">
+                <h2>GMGN Telegram Bot</h2>
+                <iframe src="https://t.me/gmgnaibot?start=i_Kt4NLeB3"></iframe>
+            </div>
+
+            <div class="iframe-wrapper">
+                <h2>DexScreener</h2>
+                <iframe src="https://dexscreener.com/solana/{{ address }}"></iframe>
+            </div>
+        </div>
+    </div>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results for {{ address }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
         /* Fullscreen Container */
         .container {

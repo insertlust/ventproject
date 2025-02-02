@@ -154,15 +154,6 @@
         <button onclick="window.location.href='/'">Check Another Coin</button>
         <h1>Analysis Results for {{ address }}</h1>
 
-        <div class="iframe-container">
-            <div class="iframe-wrapper">
-                <h2>GMGN Chart</h2>
-                <a href="https://www.gmgn.cc/kline/solana/{{ address }}" target="_blank" class="iframe-overlay"></a>
-                <div class="zoom-container">
-                    <iframe class="zoomable-iframe" src="https://www.gmgn.cc/kline/solana/{{ address }}" title="GMGN Chart"></iframe>
-                </div>
-            </div>
-
             <div class="iframe-wrapper">
                 <h2>AntiRugAgent</h2>
                 <a href="https://www.antirugagent.com/ca/{{ address }}" target="_blank" class="iframe-overlay"></a>
@@ -184,14 +175,6 @@
                 <a href="https://x.com/search?q={{ address }}&src=typed_query" target="_blank" class="iframe-overlay"></a>
                 <div class="zoom-container">
                     <iframe class="zoomable-iframe" src="https://x.com/search?q={{ address }}&src=typed_query" title="Twitter Search"></iframe>
-                </div>
-            </div>
-
-            <div class="iframe-wrapper">
-                <h2>Pump Fun</h2>
-                <a href="https://pump.fun/coin/{{ address }}" target="_blank" class="iframe-overlay"></a>
-                <div class="zoom-container">
-                    <iframe class="zoomable-iframe" src="https://pump.fun/coin/{{ address }}" title="Pump Fun"></iframe>
                 </div>
             </div>
 

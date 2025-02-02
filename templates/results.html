@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Results for {{ address }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
-     /* Fullscreen Container with Zoom Effect */
+    /* Fullscreen Container */
     .container {
         width: 100%;
         max-width: 95vw;
@@ -51,13 +51,6 @@
         align-items: center;
     }
 
-    /* Standard Monitor Resolution */
-    iframe {
-        width: 100%;
-        height: 100%;
-        border: 2px solid #FFD700;
-    }
-
     /* Clickable Iframe Wrapper */
     .iframe-wrapper {
         text-align: center;
@@ -73,6 +66,15 @@
         color: #FFD700;
         margin-bottom: 5px;
         font-size: 16px;
+    }
+
+    /* Zoomable Iframe */
+    .zoomable-iframe {
+        width: 100%;
+        height: 100%;
+        border: 2px solid #FFD700;
+        overflow: hidden;
+        touch-action: pinch-zoom;
     }
 
     /* Clickable Overlay */
@@ -91,13 +93,24 @@
             grid-template-columns: 1fr; /* Stack all iframes */
             grid-template-rows: auto;
         }
-
-        iframe {
-            width: 100%;
-            height: auto;
-        }
     }
     </style>
+    <script>
+        function enableZoom(iframe) {
+            iframe.addEventListener('wheel', function(event) {
+                event.preventDefault();
+                let scale = Number(iframe.dataset.scale) || 1;
+                scale += event.deltaY * -0.01;
+                scale = Math.min(Math.max(0.5, scale), 2);
+                iframe.style.transform = `scale(${scale})`;
+                iframe.dataset.scale = scale;
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll('.zoomable-iframe').forEach(enableZoom);
+        });
+    </script>
 </head>
 <body>
     <div class="container">
@@ -109,37 +122,37 @@
             <div class="iframe-wrapper">
                 <h2>GMGN Chart</h2>
                 <a href="https://www.gmgn.cc/kline/solana/{{ address }}" target="_blank" class="iframe-overlay"></a>
-                <iframe src="https://www.gmgn.cc/kline/solana/{{ address }}" title="GMGN Chart"></iframe>
+                <iframe class="zoomable-iframe" src="https://www.gmgn.cc/kline/solana/{{ address }}" title="GMGN Chart"></iframe>
             </div>
 
             <div class="iframe-wrapper">
                 <h2>AntiRugAgent</h2>
                 <a href="https://www.antirugagent.com/ca/{{ address }}" target="_blank" class="iframe-overlay"></a>
-                <iframe src="https://www.antirugagent.com/ca/{{ address }}" title="AntiRugAgent"></iframe>
+                <iframe class="zoomable-iframe" src="https://www.antirugagent.com/ca/{{ address }}" title="AntiRugAgent"></iframe>
             </div>
 
             <div class="iframe-wrapper">
                 <h2>TrenchBot</h2>
                 <a href="https://trench.bot/bundles/{{ address }}" target="_blank" class="iframe-overlay"></a>
-                <iframe src="https://trench.bot/bundles/{{ address }}" title="TrenchBot"></iframe>
+                <iframe class="zoomable-iframe" src="https://trench.bot/bundles/{{ address }}" title="TrenchBot"></iframe>
             </div>
 
             <div class="iframe-wrapper">
                 <h2>X (Twitter) Search</h2>
                 <a href="https://x.com/search?q={{ address }}&src=typed_query" target="_blank" class="iframe-overlay"></a>
-                <iframe src="https://x.com/search?q={{ address }}&src=typed_query" title="Twitter Search"></iframe>
+                <iframe class="zoomable-iframe" src="https://x.com/search?q={{ address }}&src=typed_query" title="Twitter Search"></iframe>
             </div>
 
             <div class="iframe-wrapper">
                 <h2>Pump Fun</h2>
                 <a href="https://pump.fun/coin/{{ address }}" target="_blank" class="iframe-overlay"></a>
-                <iframe src="https://pump.fun/coin/{{ address }}" title="Pump Fun"></iframe>
+                <iframe class="zoomable-iframe" src="https://pump.fun/coin/{{ address }}" title="Pump Fun"></iframe>
             </div>
 
             <div class="iframe-wrapper">
                 <h2>TOSHI BET CASINO NO KYC!</h2>
                 <a href="https://www.toshi.bet/r/gelo" target="_blank" class="iframe-overlay"></a>
-                <iframe src="https://www.toshi.bet/r/gelo" title="Toshi.bet"></iframe>
+                <iframe class="zoomable-iframe" src="https://www.toshi.bet/r/gelo" title="Toshi.bet"></iframe>
             </div>
         </div>
     </div>

@@ -7,94 +7,96 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
      /* Fullscreen Container with Zoom Effect */
-.container {
-    width: 100%;
-    max-width: 95vw;
-    height: 95vh;
-    background: rgba(0, 0, 0, 0.85);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    .container {
+        width: 100%;
+        max-width: 95vw;
+        height: 95vh;
+        background: rgba(0, 0, 0, 0.85);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
 
-    /* Zoom out effect */
-    transform: scale(0.85);  /* Adjust scale (1 = normal, 0.85 = zoom out) */
-    transform-origin: center;
-}
+    /* Button Styling */
+    button {
+        width: 250px;
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        background-color: #FFD700;
+        color: black;
+        font-size: 18px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+    }
 
-        /* Button Styling */
-        button {
-            width: 250px;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            background-color: #FFD700;
-            color: black;
-            font-size: 18px;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-        }
+    button:hover {
+        background-color: #DAA520;
+    }
 
-        button:hover {
-            background-color: #DAA520;
-        }
+    /* Grid Layout for Gallery View */
+    .iframe-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 3 columns */
+        grid-template-rows: repeat(2, 1fr); /* 2 rows */
+        grid-gap: 10px;
+        width: 100%;
+        height: 80%;
+        justify-content: center;
+        align-items: center;
+    }
 
-        /* Grid Layout for Gallery View */
+    /* Standard Monitor Resolution */
+    iframe {
+        width: 100%;
+        height: 100%;
+        border: 2px solid #FFD700;
+    }
+
+    /* Clickable Iframe Wrapper */
+    .iframe-wrapper {
+        text-align: center;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .iframe-wrapper h2 {
+        color: #FFD700;
+        margin-bottom: 5px;
+        font-size: 16px;
+    }
+
+    /* Clickable Overlay */
+    .iframe-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+    }
+
+    /* Mobile Adjustments: Stack iframes */
+    @media (max-width: 1024px) {
         .iframe-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 columns */
-            grid-template-rows: repeat(2, 1fr); /* 2 rows */
-            grid-gap: 10px;
-            width: 100%;
-            height: 80%;
-            justify-content: center;
-            align-items: center;
+            grid-template-columns: 1fr; /* Stack all iframes */
+            grid-template-rows: auto;
         }
 
-        /* Standard Monitor Resolution */
         iframe {
             width: 100%;
-            aspect-ratio: 16 / 9; /* Maintains correct resolution */
-            border: 2px solid #FFD700;
+            height: auto;
         }
-
-        /* Clickable Iframe Wrapper */
-        .iframe-wrapper {
-            text-align: center;
-            position: relative;
-        }
-
-        .iframe-wrapper h2 {
-            color: #FFD700;
-            margin-bottom: 5px;
-        }
-
-        /* Clickable Overlay */
-        .iframe-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
-        }
-
-        /* Mobile Adjustments: Stack iframes */
-        @media (max-width: 1024px) {
-            .iframe-container {
-                grid-template-columns: 1fr; /* Stack all iframes */
-                grid-template-rows: auto;
-            }
-
-            iframe {
-                width: 100%;
-                height: auto;
-            }
-        }
+    }
     </style>
 </head>
 <body>
@@ -103,6 +105,7 @@
         <button onclick="window.location.href='/'">Check Another Coin</button>
         <h1>Analysis Results for {{ address }}</h1>
 
+        <div class="iframe-container">
             <div class="iframe-wrapper">
                 <h2>GMGN Chart</h2>
                 <a href="https://www.gmgn.cc/kline/solana/{{ address }}" target="_blank" class="iframe-overlay"></a>
@@ -130,7 +133,7 @@
             <div class="iframe-wrapper">
                 <h2>Pump Fun</h2>
                 <a href="https://pump.fun/coin/{{ address }}" target="_blank" class="iframe-overlay"></a>
-                <iframe src="https://pump.fun/coin/{{ address }}" title="Bubble Maps"></iframe>
+                <iframe src="https://pump.fun/coin/{{ address }}" title="Pump Fun"></iframe>
             </div>
 
             <div class="iframe-wrapper">

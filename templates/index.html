@@ -11,12 +11,91 @@
             navigator.serviceWorker.register('/static/sw.js');
         }
     </script>
+    <style>
+        /* Centers everything on the page */
+        body {
+            font-family: Arial, sans-serif;
+            background: url("{{ url_for('static', filename='background.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+            text-align: center;
+        }
+
+        h1 {
+            color: #FFD700;
+            text-shadow: 2px 2px 5px rgba(255, 215, 0, 0.8);
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #FFD700;
+            background: rgba(34, 34, 34, 0.8);
+            color: white;
+            resize: none;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #FFD700;
+            color: black;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+
+        button:hover {
+            background-color: #DAA520;
+        }
+
+        .links {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .links a {
+            color: #FFD700;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 10px;
+            display: inline-block;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>INSERT LUST COIN CHECKER</h1>
         <form action="/results" method="POST">
-            <textarea name="address" id="address" placeholder="Paste Meme Coin Address Here So You Dont Get Rugged!!!!" required></textarea>
+            <textarea name="address" id="address" placeholder="Paste Meme Coin Address Here So You Don't Get Rugged!!!!" required></textarea>
             <button type="submit">CHECK</button>
         </form>
         <div class="links">

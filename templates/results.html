@@ -62,14 +62,25 @@
             border: 2px solid #FFD700;
         }
 
-        /* H2 Headers for Each Section */
+        /* Clickable Iframe Wrapper */
         .iframe-wrapper {
             text-align: center;
+            position: relative;
         }
 
         .iframe-wrapper h2 {
             color: #FFD700;
             margin-bottom: 5px;
+        }
+
+        /* Clickable Overlay */
+        .iframe-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
         }
 
         /* Mobile Adjustments: Stack iframes */
@@ -95,31 +106,37 @@
         <div class="iframe-container">
             <div class="iframe-wrapper">
                 <h2>RugCheck</h2>
+                <a href="https://rugcheck.xyz/tokens/{{ address }}" target="_blank" class="iframe-overlay"></a>
                 <iframe src="https://rugcheck.xyz/tokens/{{ address }}" title="RugCheck"></iframe>
             </div>
 
             <div class="iframe-wrapper">
                 <h2>AntiRugAgent</h2>
+                <a href="https://www.antirugagent.com/ca/{{ address }}" target="_blank" class="iframe-overlay"></a>
                 <iframe src="https://www.antirugagent.com/ca/{{ address }}" title="AntiRugAgent"></iframe>
             </div>
 
             <div class="iframe-wrapper">
                 <h2>TrenchBot</h2>
+                <a href="https://trench.bot/bundles/{{ address }}" target="_blank" class="iframe-overlay"></a>
                 <iframe src="https://trench.bot/bundles/{{ address }}" title="TrenchBot"></iframe>
             </div>
 
             <div class="iframe-wrapper">
-                <h2>GMGN Solana Token</h2>
-                <iframe src="http://gmgn.ai/sol/token/{{ address }}" title="GMGN Solana Token"></iframe>
+                <h2>X (Twitter) Search</h2>
+                <a href="https://x.com/search?q={{ address }}&src=typed_query" target="_blank" class="iframe-overlay"></a>
+                <iframe src="https://x.com/search?q={{ address }}&src=typed_query" title="Twitter Search"></iframe>
             </div>
 
             <div class="iframe-wrapper">
                 <h2>GMGN Telegram Bot</h2>
+                <a href="https://t.me/gmgnaibot?start=i_Kt4NLeB3" target="_blank" class="iframe-overlay"></a>
                 <iframe src="https://t.me/gmgnaibot?start=i_Kt4NLeB3" title="GMGN Telegram Bot"></iframe>
             </div>
 
             <div class="iframe-wrapper">
                 <h2>DexScreener</h2>
+                <a href="https://dexscreener.com/solana/{{ address }}" target="_blank" class="iframe-overlay"></a>
                 <iframe src="https://dexscreener.com/solana/{{ address }}" title="DexScreener"></iframe>
             </div>
         </div>
